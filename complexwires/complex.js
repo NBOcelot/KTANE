@@ -63,3 +63,6 @@ function solveCode(solve) { // wrong function format?
 if (solve.solveCode === 1 {console.log("CUT");
 }
 else console.log("DON'T CUT");
+
+//only allows for one wire in text
+//TODO: input multiple wires
