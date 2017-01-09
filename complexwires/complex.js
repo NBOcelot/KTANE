@@ -31,7 +31,7 @@ function keyCompare(complexWire) { // find letter that matches manual
 
 	for (let i = 0; i < wireKeyset.length; i++) { // iterate letter in keyset
 
-		if (keymatch) break;
+		if (keymatch) break; // shouldn't this be outside of the loop?
 		currentLetter = wireKeyset[i];
 			for (let j = 0; j < wireKey[currentLetter].length; j++) { //iterate array in letter
 
