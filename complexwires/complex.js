@@ -13,13 +13,10 @@ let { serial, parallel, batteries } = data; // set case parameters
 // let batteries = data.batteries;
 
 for (let i = 2; i< process.argv.length; i++) {
-var rawWire = process.argv[i].split(''); // get input from node as string array
-let complexWire = [];
-
-for (let i = 0; i < rawWire.length; i++) { // turn string array into number array
-	complexWire[i] = parseInt(rawWire[i]);
-}
-
+	const rawWire = process.argv[i].split(''); // get input as string array
+	const complexWire = rawWire.map(function(temp) { // turn into number array
+		return parseInt(temp, 10);
+	});
 
 /* // set case parameters from input
 if (charAt(serialRAW.length) % === 0) {
