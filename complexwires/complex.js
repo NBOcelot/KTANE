@@ -1,16 +1,33 @@
-// declare default bomb parameters
-let serial = false;
-let parellel = true;
-let batteries = false; // could omit values
-/*
-// input method 1 entire serial number or last digit - if even, set true;
-// input method 2 "yes/no" --needs input function
-if (charAt(serial.length) % === 0) {
-	serialBool = 1;
+const wireKey = { // Wire Answer Key
+	C: [[0, 0, 0, 0], [0, 1, 1, 0], [0, 1, 0, 0]],
+	D: [[1, 1, 1, 1], [0, 1, 0, 1], [1, 0, 0, 0]],
+	S: [[0, 0, 0, 1], [0, 0, 1, 1], [0, 0, 1, 0]],
+	P: [[0, 1, 1, 1], [1, 1, 0, 1], [1, 0, 0, 1], [1, 0, 1, 1]],
+	B: [[1, 1, 1, 0], [1, 1, 0, 0], [1, 0, 1, 0]]
+};
+
+const data = require('./parameters.json'); // get case parameters from file
+
+let { serial, parallel, batteries } = data; // set case parameters
+// let parallel = data.parallel; // OUTDATED
+// let batteries = data.batteries;
+
+for (let i = 2; i< process.argv.length; i++) {
+var rawWire = process.argv[i].split(''); // get input from node as string array
+let complexWire = [];
+
+for (let i = 0; i < rawWire.length; i++) { // turn string array into number array
+	complexWire[i] = parseInt(rawWire[i]);
+}
+
+
+/* // set case parameters from input
+if (charAt(serialRAW.length) % === 0) {
+	serial = 1;
 }
 // input hasParallel
-if (inserialallel) { //placeholder FIX THIS --needs input function
-	Pareplel = 1;
+if (hasParallel) { //placeholder FIX THIS --needs input function
+	parallel = 1;
 }
 // input # of batteries --true if 2+
 var batteries = input(batteries); //placeholder FIX THIS --needs input function
@@ -19,29 +36,10 @@ if (batteries > 1) {batteries = 1);
 */
 //--------------------------------------
 
-// put input into array --How do you pull from file?
-var complexWire = [1, 1, 1, 0]; // light, star, red, blue,
-// debug to check input
-console.log('Light: ' + complexWire[0]);
-console.log('Star: ' + complexWire[1]);
-console.log('Red: ' + complexWire[2]);
-console.log('Blue: ' + complexWire[3]);
-
-// find solve code
-
-// compare arrays Function
-
-const wireKey = {
-	C: [[0, 0, 0, 0], [0, 1, 1, 0], [0, 1, 0, 0]],
-	D: [[1, 1, 1, 1], [0, 1, 0, 1], [1, 0, 0, 0]],
-	S: [[0, 0, 0, 1], [0, 0, 1, 1], [0, 0, 1, 0]],
-  P: [[0, 1, 1, 1], [1, 1, 0, 1], [1, 0, 0, 1], [1, 0, 1, 1]],
-  B: [[1, 1, 1, 0], [1, 1, 0, 0], [1, 0, 1, 0]]
-};
-
-// console.log(Object.keys(wireKey)); // keyset array
-
-// console.log('Match: ' + keyCompare(complexWire));
+// console.log('Light: ' + complexWire[0]); // Display Booleans
+// console.log('Star:  ' + complexWire[1]);
+// console.log('Red:   ' + complexWire[2]);
+// console.log('Blue:  ' + complexWire[3]);
 
 const wireKeyset = Object.keys(wireKey); // keyset array
 
@@ -61,10 +59,8 @@ function keyCompare(complexWire) { // find letter that matches manual
 						break;
 					}
 				} //close for j
-			} //close for i
-
+		} //close for i
     return currentLetter;
-
   } // close function
 
 function arrayCompare(wireInput, wireManual) { // Compares input wire to manual
@@ -89,9 +85,7 @@ function arrayCompare(wireInput, wireManual) { // Compares input wire to manual
 } // close function
 
 let solve = keyCompare(complexWire);
-
-console.log(solve);
-
+//console.log(solve); // Show solved letter
 // solve
 function solveCode(solve) {// Check for Cut based on bomb parameters
 	if (solve === 'C') return true;
@@ -101,9 +95,6 @@ function solveCode(solve) {// Check for Cut based on bomb parameters
 	if (solve === 'B' && batteries) return true;
 	return false; // catches failed bomb papameters
 }
-// print result cut yes/no
-if (solveCode(solve)) console.log('CUT');
+if (solveCode(solve)) console.log('CUT'); // Print result
 else console.log('DON\'T CUT');
-
-// only allows for one wire in text
-// TODO: input multiple wires
+} // CLOSE top for
