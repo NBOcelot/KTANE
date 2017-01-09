@@ -9,8 +9,6 @@ const wireKey = { // Wire Answer Key
 const data = require('./parameters.json'); // get case parameters from file
 
 let { serial, parallel, batteries } = data; // set case parameters
-// let parallel = data.parallel; // OUTDATED
-// let batteries = data.batteries;
 
 for (let i = 2; i< process.argv.length; i++) {
 	const rawWire = process.argv[i].split(''); // get input as string array
@@ -19,7 +17,6 @@ for (let i = 2; i< process.argv.length; i++) {
 	});
 
 //--------------------------------------
-
 // console.log('Light: ' + complexWire[0]); // Display Booleans
 // console.log('Star:  ' + complexWire[1]);
 // console.log('Red:   ' + complexWire[2]);
@@ -32,14 +29,14 @@ function keyCompare(complexWire) { // find letter that matches manual
 	let keymatch = false; // default match to false
 	let currentLetter;
 
-		for (let i = 0; i < wireKeyset.length; i++) { // iterate letter
+	for (let i = 0; i < wireKeyset.length; i++) { // iterate letter in keyset
 
-      if (keymatch) break;
-      currentLetter = wireKeyset[i];
-        for (let j = 0; j < wireKey[currentLetter].length; j++) { //iterate array in letter
+		if (keymatch) break;
+		currentLetter = wireKeyset[i];
+			for (let j = 0; j < wireKey[currentLetter].length; j++) { //iterate array in letter
 
           if (arrayCompare(complexWire, wireKey[currentLetter][j])) {
-            keymatch = true;
+						keymatch = true;
 						break;
 					}
 				} //close for j
@@ -49,28 +46,23 @@ function keyCompare(complexWire) { // find letter that matches manual
 
 function arrayCompare(wireInput, wireManual) { // Compares input wire to manual
 
-// console.log wireInput.length
   let match = true; // set default
 
-  if (wireInput.length !== wireManual.length) {
-    return 'No Way Jose';
+  if (wireInput.length !== wireManual.length) { // exit if string lengths don't match
+    return 'No Way Jose'; // artifact from previous build, not working
   }
-
   for (let i = 0; i < wireInput.length; i++) {
-
     if (wireInput[i] !== wireManual[i]) {
 
 			match = false;
       break;
     }// close if
-
 	}// close for
 	return match;
 } // close function
 
-let solve = keyCompare(complexWire);
-//console.log(solve); // Show solved letter
-// solve
+let solved = keyCompare(complexWire);
+//console.log('Matched Letter: ' + solve); // Show solved letter
 function solveCode(solve) {// Check for Cut based on bomb parameters
 	if (solve === 'C') return true;
 	if (solve === 'D') return false;
@@ -79,6 +71,8 @@ function solveCode(solve) {// Check for Cut based on bomb parameters
 	if (solve === 'B' && batteries) return true;
 	return false; // catches failed bomb papameters
 }
-if (solveCode(solve)) console.log('CUT'); // Print result
+if (solveCode(solved)) console.log('CUT'); // Print result
 else console.log('DON\'T CUT');
 } // CLOSE top for
+
+//TODO: fix length mismatch + catch non-binary input
