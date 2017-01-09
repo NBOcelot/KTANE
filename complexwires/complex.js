@@ -1,6 +1,6 @@
 
 //declare default bomb parameters
-var serialBool = 0, parallelBool = 1, batteriesBool = 0; //could omit values
+var serialBool = 0, parallelBool = 1, batteriesBool = 1; //could omit values
 /*
 //input method 1 entire serial number or last digit - if even, set true;
 //input method 2 "yes/no" --needs input function
@@ -29,8 +29,6 @@ console.log("Blue: "+complexWire[3]);
 //find solve code
 
 //compare arrays Function
-console.log(complexWire.length);
-console.log(complexWire);
 
 const wireKey = {
 	C: [[0, 0, 0, 0], [0, 1, 1, 0], [0, 1, 0, 0]],
@@ -56,17 +54,8 @@ function keyCompare(complexWire){ //find letter that matches manual
           if (keymatch) break;
           currentLetter = wireKeyset[i];
 
-        console.log(wireKeyset[i]) //get letter in keyset array
-        console.log('Current Letter: ' + currentLetter); //current letter
-        console.log(wireKey[currentLetter]); //current letter's full array
-
         for (let j = 0; j < wireKey[currentLetter].length; j++) { //iterate array in letter
-						console.log(wireKey[currentLetter]);
-						console.log(wireKey[currentLetter].length);
-//          console.log(wireKey[currentLetter][j]); //current array
-						console.log(complexWire);
-						console.log(wireKey[currentLetter][j]);
-//						console.log(arrayCompare(complexWire, wireKey[currentLetter][j]))
+
           if (arrayCompare(complexWire, wireKey[currentLetter][j])) {
             keymatch = true;
             break;}
@@ -93,29 +82,22 @@ function arrayCompare(wireInput, wireManual) { //Compares input wire to manual
 
   for (let i = 0; i < wireInput.length; i++) {
 
-    console.log(i+' loopvalue');
-		console.log(wireInput.length+" LENGTH?");
-
-		console.log(wireInput, wireManual+ " END1");
     if (wireInput[i] !== wireManual[i]) {
-			console.log(wireInput, wireManual+ " END2");
-			console.log(wireInput[i]+ 'aaaaaaaaaaaa');
+
 			match = false;
       break;
     }//close if
 
-  console.log(match+' end');
-  return match;
 	}//close for
-
+	return match;
 } //close function
 
 let solve = keyCompare(complexWire);
 
-console.log(solve+" FINAL");
+console.log(solve);
 
-//solve --DONE
-function solveCode(solve) { // wrong function format?
+//solve
+function solveCode(solve) {// Check for Cut based on bomb parameters
 	if (solve === 'C') {return cut = 1;
 	}
 	if (solve === 'D') {return cut = 0;
@@ -129,7 +111,6 @@ function solveCode(solve) { // wrong function format?
 	else return cut = 0; //not needed but catches the parameter = 0 cases
 }
 //print result cut yes/no
-console.log(solveCode(solve));
 if (solveCode(solve) === 1) {console.log("CUT");
 }
 else console.log("DON'T CUT");
