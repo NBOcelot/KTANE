@@ -53,9 +53,8 @@ function arrayCompare(wireInput, wireManual) { // Compares input wire to manual
   }
   for (let i = 0; i < wireInput.length; i++) {
     if (wireInput[i] !== wireManual[i]) {
-
 			match = false;
-      break;
+			break;
     }// close if
 	}// close for
 	return match;
