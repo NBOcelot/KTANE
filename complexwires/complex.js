@@ -18,19 +18,6 @@ for (let i = 2; i< process.argv.length; i++) {
 		return parseInt(temp, 10);
 	});
 
-/* // set case parameters from input
-if (charAt(serialRAW.length) % === 0) {
-	serial = 1;
-}
-// input hasParallel
-if (hasParallel) { //placeholder FIX THIS --needs input function
-	parallel = 1;
-}
-// input # of batteries --true if 2+
-var batteries = input(batteries); //placeholder FIX THIS --needs input function
-if (batteries > 1) {batteries = 1);
-}
-*/
 //--------------------------------------
 
 // console.log('Light: ' + complexWire[0]); // Display Booleans
