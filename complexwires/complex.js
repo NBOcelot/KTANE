@@ -1,6 +1,6 @@
 
 //declare default bomb parameters
-var serialBool = 0, parallelBool = 0, batteriesBool = 0; //could omit values
+var serialBool = 0, parallelBool = 1, batteriesBool = 0; //could omit values
 /*
 //input method 1 entire serial number or last digit - if even, set true;
 //input method 2 "yes/no" --needs input function
@@ -19,7 +19,7 @@ if (batteries > 1) {batteriesBool = 1);
 //--------------------------------------
 
 //put input into array --How do you pull from file?
-var complexWire = [0, 1, 1, 0]; // light, star, red, blue,
+var complexWire = [1, 1, 1, 0]; // light, star, red, blue,
 //debug to check input
 console.log("Light: "+complexWire[0]);
 console.log("Star: "+complexWire[1]);
@@ -46,24 +46,27 @@ const wireKey = {
 
 const wireKeyset = Object.keys(wireKey); //keyset array
 
-function keyCompare(complexWire){
+function keyCompare(complexWire){ //find letter that matches manual
 
   let keymatch = false; //default match to false
   let currentLetter;
 
-    for (let i = 0; i < Object.keys(wireKey).length; i++) { //iterate letter
+    for (let i = 0; i < wireKeyset.length; i++) { //iterate letter
 
           if (keymatch) break;
-          currentLetter = (Object.keys(wireKey)[i]);
+          currentLetter = wireKeyset[i];
 
-//        console.log(Object.keys(wireKey)[i]) //get letter in keyset array
-//        console.log('Current Letter: ' + currentLetter); //current letter
-//        console.log(wireKey[currentLetter]); //current letter's full array
+        console.log(wireKeyset[i]) //get letter in keyset array
+        console.log('Current Letter: ' + currentLetter); //current letter
+        console.log(wireKey[currentLetter]); //current letter's full array
 
         for (let j = 0; j < wireKey[currentLetter].length; j++) { //iterate array in letter
-
+						console.log(wireKey[currentLetter]);
+						console.log(wireKey[currentLetter].length);
 //          console.log(wireKey[currentLetter][j]); //current array
-
+						console.log(complexWire);
+						console.log(wireKey[currentLetter][j]);
+//						console.log(arrayCompare(complexWire, wireKey[currentLetter][j]))
           if (arrayCompare(complexWire, wireKey[currentLetter][j])) {
             keymatch = true;
             break;}
@@ -81,22 +84,27 @@ function keyCompare(complexWire){
 
 function arrayCompare(wireInput, wireManual) { //Compares input wire to manual
 
-  var match = true; //set default
+// console.log wireInput.length
+  let match = true; //set default
 
   if (wireInput.length !== wireManual.length) {
     return 'No Way Jose';
   }
 
-  for (i = 0; i < wireInput.length; i++) {
+  for (let i = 0; i < wireInput.length; i++) {
 
     console.log(i+' loopvalue');
+		console.log(wireInput.length+" LENGTH?");
 
+		console.log(wireInput, wireManual+ " END1");
     if (wireInput[i] !== wireManual[i]) {
-      match = false;
+			console.log(wireInput, wireManual+ " END2");
+			console.log(wireInput[i]+ 'aaaaaaaaaaaa');
+			match = false;
       break;
     }//close if
 
-  console.log(match+'end');
+  console.log(match+' end');
   return match;
 	}//close for
 
@@ -104,7 +112,7 @@ function arrayCompare(wireInput, wireManual) { //Compares input wire to manual
 
 let solve = keyCompare(complexWire);
 
-console.log(solve);
+console.log(solve+" FINAL");
 
 //solve --DONE
 function solveCode(solve) { // wrong function format?
