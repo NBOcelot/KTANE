@@ -1,8 +1,5 @@
 {
 	"serial": false,
-	"parallel": true,
-	"batteries": false
+	"parallel": false,
+	"batteries": true
 }
-/*Batteries true if 2 or more
-Serial true if last digit is even
-Parallel true if case has a parallel port*/
